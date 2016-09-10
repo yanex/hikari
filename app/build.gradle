@@ -8,7 +8,7 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "org.yanex.lighting"
+        applicationId "org.yanex.hikari"
         minSdkVersion 18
         targetSdkVersion 21
         versionCode 1

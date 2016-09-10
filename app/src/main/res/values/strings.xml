@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lighting</string>
+    <string name="app_name">Hikari</string>
 
     <!-- MainActivity -->
     <string name="main_about">About</string>
