@@ -134,7 +134,11 @@ class DeviceAdapter(val flakeManager: FlakeManager) : MutableAdapter<Device, Dev
     override fun bind(holder: DeviceAdapterHolder, item: Device) = holder.bind {
         img, name ->
 
-        img.imageResource = if (item.isAvailable) android.R.drawable.ic_media_next else android.R.drawable.ic_delete
+        img.imageResource = if (item.isAvailable)
+            R.drawable.ic_done_black_24dp
+        else
+            R.drawable.ic_hourglass_empty_black_24dp
+
         name.text = item.name
     }
 }
