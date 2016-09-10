@@ -56,7 +56,6 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                 val flakeLayout = FlakeLayout(ctx.owner.activity)
                 val flakeManager = FlakeManager.create(flakeLayout, ctx.owner.flakeContext)
 
-                var setUp = false
                 val grp = radioGroup {
                     radioButton {
                         id = ID_WHITE_MODE
@@ -71,19 +70,24 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                     onCheckedChange { radioGroup, i -> when (i) {
                         ID_WHITE_MODE -> {
                             flakeManager.show(WhiteModeFlake(device))
-                            if (setUp) device.execute(Commands.setWhiteTemperature(0))
+                            device.execute(Commands.setWhiteTemperature(0))
                         }
-                        ID_RGB_MODE -> {
-                            flakeManager.show(RGBModeFlake(device))
-                        }
+                        ID_RGB_MODE -> flakeManager.show(RGBModeFlake(device))
                     }}
                 }.lparams { bottomMargin = dip(8) }
 
                 addView(flakeLayout)
 
-                val isRGB = device.state is RGBModeDeviceState
-                grp.check(if (isRGB) ID_RGB_MODE else ID_WHITE_MODE)
-                setUp = true
+                when (device.state) {
+                    is RGBModeDeviceState -> {
+                        grp.check(ID_RGB_MODE)
+                        flakeManager.show(RGBModeFlake(device))
+                    }
+                    else -> {
+                        grp.check(ID_WHITE_MODE)
+                        flakeManager.show(WhiteModeFlake(device))
+                    }
+                }
             }
         }
     }
