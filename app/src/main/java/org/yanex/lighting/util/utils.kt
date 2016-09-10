@@ -9,6 +9,7 @@ import org.jetbrains.anko.custom.ankoView
 import org.yanex.flake.FlakeContext
 import org.yanex.flake.FlakeLayout
 import org.yanex.lighting.lamp.DeviceManager
+import org.yanex.lighting.util.menu.MenuManager
 
 inline fun ViewManager.flakeLayout(theme: Int = 0): FlakeLayout = flakeLayout(theme) {}
 inline fun ViewManager.flakeLayout(theme: Int = 0, init: FlakeLayout.() -> Unit): FlakeLayout {
@@ -20,8 +21,8 @@ fun <T : View> T.nextId(): T {
     return this
 }
 
-val FlakeContext.toolbar: Toolbar
+val FlakeContext.deviceManager: DeviceManager
     get() = getComponent()
 
-val FlakeContext.deviceManager: DeviceManager
+val FlakeContext.menuManager: MenuManager
     get() = getComponent()

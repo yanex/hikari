@@ -14,16 +14,12 @@ import org.yanex.lighting.flakes.DevicesFlake
 import org.yanex.lighting.lamp.Device
 import org.yanex.lighting.lamp.DeviceManager
 import org.yanex.lighting.lamp.DeviceState
-import org.yanex.lighting.util.MenuFactory
-import org.yanex.lighting.util.consume
+import org.yanex.lighting.util.menu.DelegatedMenuActivity
+import org.yanex.lighting.util.menu.MenuFactory
+import org.yanex.lighting.util.menu.consume
 import org.yanex.lighting.util.getSystemService
 
-class MainActivity : AppCompatActivity() {
-    private object MainMenu : MenuFactory() {
-        val MENU_ID_ABOUT = menuItem(R.string.main_about).icon(R.drawable.ic_info_outline_white_24dp).showAsAction()
-        val MENU_ID_SCAN = menuItem(R.string.main_scan).icon(R.drawable.ic_autorenew_white_24dp).showAsAction()
-    }
-
+class MainActivity : DelegatedMenuActivity() {
     private val ID_FLAKE_LAYOUT = 1000
     private lateinit var flakeManager: FlakeManager
 
@@ -48,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         val deviceManager = createDeviceManager() ?: return
 
         val flakeContext = FlakeContext.create(this, savedInstanceState)
+        flakeContext.useComponent(menuManager)
 
         verticalLayout {
             include<Toolbar>(R.layout.toolbar) {
@@ -96,22 +93,5 @@ class MainActivity : AppCompatActivity() {
         if (!flakeManager.onBackPressed()) {
             super.onBackPressed()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu) = MainMenu.init(menu)
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        MainMenu.MENU_ID_ABOUT.itemId -> consume {
-            alert {
-                title(R.string.main_about)
-                message(R.string.main_about_text)
-                icon(R.drawable.ic_info_outline_black_24dp)
-                okButton { dismiss() }
-            }.show()
-        }
-        MainMenu.MENU_ID_SCAN.itemId -> consume {
-            flakeManager.flakeContext.deviceManager.resync()
-        }
-        else -> super.onOptionsItemSelected(item)
     }
 }

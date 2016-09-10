@@ -10,17 +10,25 @@ import org.yanex.lighting.R
 import org.yanex.lighting.flakeLayout
 import org.yanex.lighting.lamp.Commands
 import org.yanex.lighting.lamp.Device
+import org.yanex.lighting.menuManager
 import org.yanex.lighting.util.AnkoFlakeHolder
 import org.yanex.lighting.util.make
+import org.yanex.lighting.util.menu.FlakeWithMenu
 
-class DeviceFlake(val device: Device) : Flake<DeviceFlake.Holder>() {
+class DeviceFlake(val device: Device) : Flake<DeviceFlake.Holder>(), FlakeWithMenu<DeviceFlake.Holder> {
     private companion object {
         private val ID_FLAKE_LAYOUT = 1000
     }
 
     override fun createHolder(manager: FlakeManager) = Holder(manager)
 
+    override fun setup(h: Holder, manager: FlakeManager) {
+        super<Flake>.setup(h, manager)
+        super<FlakeWithMenu>.setup(h, manager)
+    }
+
     override fun update(h: Holder, manager: FlakeManager, result: Any?) {
+        super<FlakeWithMenu>.update(h, manager, result)
         device.updateState()
     }
 
