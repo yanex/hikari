@@ -5,7 +5,7 @@ apply plugin: 'net.vrallev.jarjar'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "org.yanex.lighting"
