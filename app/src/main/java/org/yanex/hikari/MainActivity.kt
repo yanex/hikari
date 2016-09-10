@@ -2,10 +2,7 @@ package org.yanex.hikari
 
 import android.bluetooth.BluetoothManager
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
 import org.jetbrains.anko.*
 import org.yanex.flake.FlakeContext
 import org.yanex.flake.FlakeLayout
@@ -15,8 +12,6 @@ import org.yanex.hikari.lamp.Device
 import org.yanex.hikari.lamp.DeviceManager
 import org.yanex.hikari.lamp.DeviceState
 import org.yanex.hikari.util.menu.DelegatedMenuActivity
-import org.yanex.hikari.util.menu.MenuFactory
-import org.yanex.hikari.util.menu.consume
 import org.yanex.hikari.util.getSystemService
 
 class MainActivity : DelegatedMenuActivity() {
@@ -37,11 +32,13 @@ class MainActivity : DelegatedMenuActivity() {
         }
     }
 
+    private val deviceManager: DeviceManager
+        get() = flakeManager.flakeContext.deviceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //todo reuse on configuration changes
-        val deviceManager = createDeviceManager() ?: return
+        val deviceManager = (lastCustomNonConfigurationInstance as? DeviceManager) ?: createDeviceManager() ?: return
 
         val flakeContext = FlakeContext.create(this, savedInstanceState)
         flakeContext.useComponent(menuManager)
@@ -62,8 +59,10 @@ class MainActivity : DelegatedMenuActivity() {
         deviceManager.apply {
             flakeContext.useComponent(this)
             addHandler(newDeviceHandler)
-            scan()
-            connectAll()
+            if (deviceManager.devices.isEmpty()) {
+                scan()
+                connectAll()
+            }
         }
 
         flakeManager.restoreStateOrShow { DevicesFlake() }
@@ -77,14 +76,16 @@ class MainActivity : DelegatedMenuActivity() {
             return null
         }
 
-        return DeviceManager(bluetoothAdapter, this)
+        return DeviceManager(bluetoothAdapter, applicationContext)
     }
+
+    override fun onRetainCustomNonConfigurationInstance() = deviceManager
 
     override fun onDestroy() {
         super.onDestroy()
-        flakeManager.flakeContext.deviceManager.apply {
+        deviceManager.apply {
             removeHandler(newDeviceHandler)
-            disconnectAll()
+            if (!isChangingConfigurations) disconnectAll()
         }
     }
 
