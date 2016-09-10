@@ -46,7 +46,4 @@ dependencies {
     compile "org.jetbrains.anko:anko-cardview-v7:0.9"
     compile "org.jetbrains.anko:anko-recyclerview-v7:0.9"
     compile "org.jetbrains.anko:anko-design:0.9"
-
-//    compile project(':BleLibrary')
-//    jarjar 'commons-codec:commons-codec:1.10'
 }
