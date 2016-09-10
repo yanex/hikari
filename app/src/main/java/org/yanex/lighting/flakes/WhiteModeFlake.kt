@@ -28,6 +28,7 @@ class WhiteModeFlake(val device: Device) : LampModeFlake<WhiteModeFlake.Holder>(
                 }
 
                 temperature = seekBar {
+                    verticalPadding = dip(8)
                     max = 9
 
                     val temperature = (device.state as? WhiteModeDeviceState)?.temperature ?: max

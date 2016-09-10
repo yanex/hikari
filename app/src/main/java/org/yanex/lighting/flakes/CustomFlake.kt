@@ -44,6 +44,7 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                 }
 
                 brightness = seekBar {
+                    verticalPadding = dip(8)
                     max = 9
                     device.state?.brightness?.let { progress = it }
 
