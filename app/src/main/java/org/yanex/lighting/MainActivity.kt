@@ -20,8 +20,8 @@ import org.yanex.lighting.util.getSystemService
 
 class MainActivity : AppCompatActivity() {
     private object MainMenu : MenuFactory() {
-        val MENU_ID_ABOUT = menuItem(R.string.main_about).showAsAction()
-        val MENU_ID_SCAN = menuItem(R.string.main_scan).showAsAction()
+        val MENU_ID_ABOUT = menuItem(R.string.main_about).icon(R.drawable.ic_info_outline_white_24dp).showAsAction()
+        val MENU_ID_SCAN = menuItem(R.string.main_scan).icon(R.drawable.ic_autorenew_white_24dp).showAsAction()
     }
 
     private val ID_FLAKE_LAYOUT = 1000
@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             alert {
                 title(R.string.main_about)
                 message(R.string.main_about_text)
+                icon(R.drawable.ic_info_outline_black_24dp)
                 okButton { dismiss() }
             }.show()
         }

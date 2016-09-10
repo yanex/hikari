@@ -54,6 +54,16 @@ class MenuItemFactory internal constructor(
     var enabled: Boolean? = null
     var visible: Boolean? = null
 
+    fun icon(resource: Int): MenuItemFactory {
+        this.iconResource = resource
+        return this
+    }
+
+    fun icon(drawable: Drawable): MenuItemFactory {
+        this.iconDrawable = drawable
+        return this
+    }
+
     fun showAsAction(): MenuItemFactory {
         this.showAsAction = MenuItem.SHOW_AS_ACTION_ALWAYS
         return this
