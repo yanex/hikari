@@ -6,6 +6,7 @@ import org.jetbrains.anko.design.tabLayout
 import org.jetbrains.anko.verticalLayout
 import org.yanex.flake.Flake
 import org.yanex.flake.FlakeManager
+import org.yanex.lighting.R
 import org.yanex.lighting.flakeLayout
 import org.yanex.lighting.lamp.Commands
 import org.yanex.lighting.lamp.Device
@@ -35,8 +36,8 @@ class DeviceFlake(val device: Device) : Flake<DeviceFlake.Holder>() {
         override fun initView(ctx: AnkoContext<FlakeManager>) = ctx.make {
             verticalLayout {
                 val tabLayout = tabLayout {
-                    addTab(newTab().setText("Presets"))
-                    addTab(newTab().setText("Custom"))
+                    addTab(newTab().setText(R.string.device_presets))
+                    addTab(newTab().setText(R.string.device_custom))
                 }
 
                 flakeLayout {

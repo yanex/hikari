@@ -3,6 +3,7 @@ package org.yanex.lighting.flakes
 import android.widget.SeekBar
 import org.jetbrains.anko.*
 import org.yanex.flake.FlakeManager
+import org.yanex.lighting.R
 import org.yanex.lighting.lamp.Device
 import org.yanex.lighting.lamp.WhiteModeDeviceState
 import org.yanex.lighting.util.AnkoFlakeHolder
@@ -22,7 +23,7 @@ class WhiteModeFlake(val device: Device) : LampModeFlake<WhiteModeFlake.Holder>(
 
         override fun initView(ctx: AnkoContext<FlakeManager>) = ctx.make {
             verticalLayout {
-                textView("Temperature") {
+                textView(R.string.whitemode_temperature, theme = 0) {
                     textSize = 18f
                 }
 

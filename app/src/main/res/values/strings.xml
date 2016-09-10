@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Lighting</string>
+
+    <!-- MainActivity -->
+    <string name="main_about">About</string>
+    <string name="main_scan">Scan</string>
+    <string name="main_bluetooth_not_supported">Bluetooth is not supported on this device.</string>
+
+    <string name="main_about_text">About text!</string>
+
+    <!-- DevicesFlake -->
+    <string name="devices_device_is_offline">Device is offline.</string>
+
+    <!-- DeviceFlake -->
+    <string name="device_presets">Presets</string>
+    <string name="device_custom">Custom</string>
+
+    <!-- CustomFlake -->
+    <string name="custom_brightness">Brightness:</string>
+    <string name="custom_white_mode">White mode</string>
+    <string name="custom_rgb_mode">RGB mode</string>
+
+    <!-- WhiteModeFlake -->
+    <string name="whitemode_temperature">Temperature:</string>
 </resources>

@@ -6,6 +6,7 @@ import org.yanex.flake.Flake
 import org.yanex.flake.FlakeHolder
 import org.yanex.flake.FlakeLayout
 import org.yanex.flake.FlakeManager
+import org.yanex.lighting.R
 import org.yanex.lighting.lamp.Commands
 import org.yanex.lighting.lamp.Device
 import org.yanex.lighting.lamp.DeviceState
@@ -38,7 +39,7 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
             verticalLayout {
                 padding = dip(8)
 
-                textView("Brightness") {
+                textView(R.string.custom_brightness, theme = 0) {
                     textSize = 18f
                 }
 
@@ -59,12 +60,12 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                 val grp = radioGroup {
                     radioButton {
                         id = ID_WHITE_MODE
-                        text = "White mode"
+                        textResource = R.string.custom_white_mode
                         isChecked = true
                     }
                     radioButton {
                         id = ID_RGB_MODE
-                        text = "RGB mode"
+                        textResource = R.string.custom_rgb_mode
                     }
 
                     onCheckedChange { radioGroup, i -> when (i) {

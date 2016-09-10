@@ -8,6 +8,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import org.yanex.flake.Flake
 import org.yanex.flake.FlakeManager
+import org.yanex.lighting.R
 import org.yanex.lighting.deviceManager
 import org.yanex.lighting.lamp.Commands
 import org.yanex.lighting.lamp.Device
@@ -94,7 +95,7 @@ class DeviceAdapter(val flakeManager: FlakeManager) : MutableAdapter<Device, Dev
                 if (device.item.isAvailable) {
                     flakeManager.show(DeviceFlake(device.item))
                 } else {
-                    toast("Device is offline.")
+                    toast(R.string.devices_device_is_offline)
                 }
             }
         }

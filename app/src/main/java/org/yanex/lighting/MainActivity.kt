@@ -20,8 +20,8 @@ import org.yanex.lighting.util.getSystemService
 
 class MainActivity : AppCompatActivity() {
     private object MainMenu : MenuFactory() {
-        val MENU_ID_ABOUT = menuItem("About").showAsAction()
-        val MENU_ID_SYNC = menuItem("Sync").showAsAction()
+        val MENU_ID_ABOUT = menuItem(R.string.main_about).showAsAction()
+        val MENU_ID_SCAN = menuItem(R.string.main_scan).showAsAction()
     }
 
     private val ID_FLAKE_LAYOUT = 1000
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     private fun createDeviceManager(): DeviceManager? {
         val bluetoothAdapter = getSystemService<BluetoothManager>()?.adapter
         if (bluetoothAdapter == null) {
-            toast("Bluetooth is not supported on this phone.")
+            toast(R.string.main_bluetooth_not_supported)
             finish()
             return null
         }
@@ -102,9 +102,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         MainMenu.MENU_ID_ABOUT.itemId -> consume {
-            toast("About!")
+            alert {
+                title(R.string.main_about)
+                message(R.string.main_about_text)
+                okButton { dismiss() }
+            }.show()
         }
-        MainMenu.MENU_ID_SYNC.itemId -> consume {
+        MainMenu.MENU_ID_SCAN.itemId -> consume {
             flakeManager.flakeContext.deviceManager.resync()
         }
         else -> super.onOptionsItemSelected(item)
