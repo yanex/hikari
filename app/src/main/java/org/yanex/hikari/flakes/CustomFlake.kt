@@ -6,6 +6,7 @@ import org.yanex.flake.Flake
 import org.yanex.flake.FlakeHolder
 import org.yanex.flake.FlakeLayout
 import org.yanex.flake.FlakeManager
+import org.yanex.hikari.FlakeLayoutIds
 import org.yanex.hikari.R
 import org.yanex.hikari.lamp.Commands
 import org.yanex.hikari.lamp.Device
@@ -55,7 +56,10 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                     }
                 }.lparams(width = matchParent) { bottomMargin = dip(8) }
 
-                val flakeLayout = FlakeLayout(ctx.owner.activity)
+                val flakeLayout = FlakeLayout(ctx.owner.activity).apply {
+                    id = FlakeLayoutIds.CUSTOM_FLAKE_LAYOUT_ID
+                }
+
                 val flakeManager = FlakeManager.create(flakeLayout, ctx.owner.flakeContext)
 
                 val grp = radioGroup {

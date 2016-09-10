@@ -1,6 +1,7 @@
 package org.yanex.hikari
 
 import android.bluetooth.BluetoothManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import org.jetbrains.anko.*
@@ -14,8 +15,13 @@ import org.yanex.hikari.lamp.DeviceState
 import org.yanex.hikari.util.menu.DelegatedMenuActivity
 import org.yanex.hikari.util.getSystemService
 
+object FlakeLayoutIds {
+    val MAIN_FLAKE_LAYOUT_ID = 1000
+    val DEVICE_FLAKE_LAYOUT_ID = 1001
+    val CUSTOM_FLAKE_LAYOUT_ID = 1002
+}
+
 class MainActivity : DelegatedMenuActivity() {
-    private val ID_FLAKE_LAYOUT = 1000
     private lateinit var flakeManager: FlakeManager
 
     private val newDeviceHandler = object : DeviceManager.Handler {
@@ -50,11 +56,11 @@ class MainActivity : DelegatedMenuActivity() {
             }
 
             flakeLayout {
-                id = ID_FLAKE_LAYOUT
+                id = FlakeLayoutIds.MAIN_FLAKE_LAYOUT_ID
             }.lparams(matchParent, matchParent)
         }
 
-        flakeManager = FlakeManager.create(find<FlakeLayout>(ID_FLAKE_LAYOUT), flakeContext)
+        flakeManager = FlakeManager.create(find<FlakeLayout>(FlakeLayoutIds.MAIN_FLAKE_LAYOUT_ID), flakeContext)
 
         deviceManager.apply {
             flakeContext.useComponent(this)
@@ -66,6 +72,16 @@ class MainActivity : DelegatedMenuActivity() {
         }
 
         flakeManager.restoreStateOrShow { DevicesFlake() }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        flakeManager.flakeContext.onConfigurationChanged(newConfig)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        flakeManager.flakeContext.saveInstanceState(outState)
     }
 
     private fun createDeviceManager(): DeviceManager? {
