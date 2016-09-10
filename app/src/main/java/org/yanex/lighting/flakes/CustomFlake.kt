@@ -68,14 +68,6 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                         id = ID_RGB_MODE
                         textResource = R.string.custom_rgb_mode
                     }
-
-                    onCheckedChange { radioGroup, i -> when (i) {
-                        ID_WHITE_MODE -> {
-                            flakeManager.show(WhiteModeFlake(device))
-                            device.execute(Commands.setWhiteTemperature(0))
-                        }
-                        ID_RGB_MODE -> flakeManager.show(RGBModeFlake(device))
-                    }}
                 }.lparams { bottomMargin = dip(8) }
 
                 addView(flakeLayout)
@@ -90,6 +82,14 @@ class CustomFlake(val device: Device) : Flake<CustomFlake.Holder>() {
                         flakeManager.show(WhiteModeFlake(device))
                     }
                 }
+
+                grp.onCheckedChange { radioGroup, i -> when (i) {
+                    ID_WHITE_MODE -> {
+                        flakeManager.show(WhiteModeFlake(device))
+                        device.execute(Commands.setWhiteTemperature(0))
+                    }
+                    ID_RGB_MODE -> flakeManager.show(RGBModeFlake(device))
+                }}
             }
         }
     }
