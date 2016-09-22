@@ -10,6 +10,9 @@
 
     <!-- DevicesFlake -->
     <string name="devices_device_is_offline">Device is offline.</string>
+    <string name="devices_set_device_name">Set device name:</string>
+    <string name="devices_device_name">Device name</string>
+    <string name="devices_reset">Reset</string>
 
     <!-- DeviceFlake -->
     <string name="device_presets">Presets</string>

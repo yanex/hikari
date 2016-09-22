@@ -40,6 +40,8 @@ dependencies {
     compile 'com.github.yanex.flake:library:v0.1.5'
     compile "com.github.danielnilsson9:color-picker-view:1.4.0@aar"
 
+    compile 'io.paperdb:paperdb:1.5'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.anko:anko-sdk15:0.9"
     compile "org.jetbrains.anko:anko-appcompat-v7:0.9"

@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import io.paperdb.Paper
 import org.jetbrains.anko.*
 import org.yanex.flake.FlakeContext
 import org.yanex.flake.FlakeLayout
@@ -70,6 +71,8 @@ class MainActivity : DelegatedMenuActivity() {
                 connectAll()
             }
         }
+
+        Paper.init(this)
 
         flakeManager.restoreStateOrShow { DevicesFlake() }
     }
