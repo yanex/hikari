@@ -17,6 +17,7 @@
     <!-- DeviceFlake -->
     <string name="device_presets">Presets</string>
     <string name="device_custom">Custom</string>
+    <string name="device_on_off">Turn on/off</string>
 
     <!-- CustomFlake -->
     <string name="custom_brightness">Brightness:</string>

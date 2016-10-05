@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import io.paperdb.Paper
 import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.titleResource
 import org.jetbrains.anko.cardview.v7.cardView
 import org.yanex.flake.Flake
 import org.yanex.flake.FlakeManager
@@ -17,6 +18,7 @@ import org.yanex.hikari.lamp.Device
 import org.yanex.hikari.list.MutableAdapter
 import org.yanex.hikari.list.RecyclerViewFlakeHolder
 import org.yanex.hikari.nextId
+import org.yanex.hikari.toolbar
 import org.yanex.hikari.util.menu.MenuFactory
 import org.yanex.hikari.util.menu.consume
 import org.yanex.hikari.util.holder.RecyclerHolder2
@@ -49,12 +51,18 @@ class DevicesFlake : Flake<DevicesFlakeHolder>(), FlakeWithMenu<DevicesFlakeHold
 
     override fun setup(h: DevicesFlakeHolder, manager: FlakeManager) {
         super<FlakeWithMenu>.setup(h, manager)
+        setToolbarTitle(manager)
         updateDevices(h, manager)
     }
 
     override fun update(h: DevicesFlakeHolder, manager: FlakeManager, result: Any?) {
         super<FlakeWithMenu>.update(h, manager, result)
+        setToolbarTitle(manager)
         updateDevices(h, manager)
+    }
+
+    private fun setToolbarTitle(manager: FlakeManager) {
+        manager.flakeContext.toolbar.titleResource = R.string.app_name
     }
 
     override fun onMenuItemSelected(h: DevicesFlakeHolder, manager: FlakeManager, item: MenuItem) = when (item.itemId) {
@@ -161,7 +169,9 @@ class DeviceAdapter(val flakeManager: FlakeManager, val flake: DevicesFlake) : M
 
             onClick {
                 if (device.item.isAvailable) {
-                    flakeManager.show(DeviceFlake(device.item))
+                    val nameMapping = flake.getMapping(device.item)
+                    val deviceName = if (nameMapping.isNullOrBlank()) device.item.name else nameMapping!!
+                    flakeManager.show(DeviceFlake(device.item, deviceName))
                 } else {
                     toast(R.string.devices_device_is_offline)
                 }

@@ -12,8 +12,9 @@ import org.yanex.hikari.lamp.DeviceManager
 import org.yanex.hikari.util.menu.MenuManager
 
 inline fun ViewManager.flakeLayout(theme: Int = 0): FlakeLayout = flakeLayout(theme) {}
+
 inline fun ViewManager.flakeLayout(theme: Int = 0, init: FlakeLayout.() -> Unit): FlakeLayout {
-    return ankoView({ FlakeLayout(it) }, theme) { init() }
+    return ankoView(::FlakeLayout, theme) { init() }
 }
 
 fun <T : View> T.nextId(): T {
@@ -25,4 +26,7 @@ val FlakeContext.deviceManager: DeviceManager
     get() = getComponent()
 
 val FlakeContext.menuManager: MenuManager
+    get() = getComponent()
+
+val FlakeContext.toolbar: Toolbar
     get() = getComponent()
