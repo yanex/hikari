@@ -11,10 +11,6 @@ interface FlakeWithMenu<T : FlakeHolder> : FlakeBase<T> {
         setMenu(h, manager)
     }
 
-    override fun update(h: T, manager: FlakeManager, result: Any?) {
-        setMenu(h, manager)
-    }
-
     private fun setMenu(h: T, manager: FlakeManager) {
         val menuFactory = this.menuFactory
         val menuManager = manager.flakeContext.menuManager

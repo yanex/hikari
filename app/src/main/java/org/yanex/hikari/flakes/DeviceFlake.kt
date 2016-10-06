@@ -40,9 +40,6 @@ class DeviceFlake(
     }
 
     override fun update(h: Holder, manager: FlakeManager, result: Any?) {
-        super<FlakeWithMenu>.update(h, manager, result)
-        setToolbarTitle(manager)
-        updateOnOffIcon(h)
         device.updateState()
     }
 

@@ -17,7 +17,7 @@ class PresetsFlake : Flake<PresetsFlakeHolder>() {
 
     override fun createHolder(manager: FlakeManager) = RecyclerViewFlakeHolder(manager) { PresetAdapter(it) }
 
-    override fun setup(h: RecyclerViewFlakeHolder<PresetAdapter>, manager: FlakeManager) {
+    override fun init(h: RecyclerViewFlakeHolder<PresetAdapter>, manager: FlakeManager) {
         h.listAdapter += presets
     }
 }

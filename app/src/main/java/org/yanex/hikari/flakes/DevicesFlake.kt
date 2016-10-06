@@ -55,12 +55,6 @@ class DevicesFlake : Flake<DevicesFlakeHolder>(), FlakeWithMenu<DevicesFlakeHold
         updateDevices(h, manager)
     }
 
-    override fun update(h: DevicesFlakeHolder, manager: FlakeManager, result: Any?) {
-        super<FlakeWithMenu>.update(h, manager, result)
-        setToolbarTitle(manager)
-        updateDevices(h, manager)
-    }
-
     private fun setToolbarTitle(manager: FlakeManager) {
         manager.flakeContext.toolbar.titleResource = R.string.app_name
     }
